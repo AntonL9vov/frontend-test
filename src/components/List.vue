@@ -49,7 +49,7 @@ export default {
       }
 
       return 100 / count;
-    },//лучше перенести этот метод в методы, так как computed свойства кешируются
+    },//лучше перенести этот метод в методы, так как computed свойства кешируются, так же возможно стоило решить это посредством css
     startPricesMonitoring() {
       setInterval(this.getList, 1000);
     },
