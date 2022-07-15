@@ -1,6 +1,6 @@
 <template>
   <div class="product-list">
-    <div class="card" v-for="product in products" :style="{width: cardsWidth + '%'}">
+    <div class="card" v-for="product in products" :style="{width: cardsWidth() + '%'}">
       <p class="card-title">{{ product.title }}</p>
       <img class="card-image" :src="product.image" alt="">
       <p class="card-price">Цена: {{ product.price }} {{ currency }}</p>
@@ -26,19 +26,30 @@ export default {
     };
   },
   computed: {
+    // cardsWidth() {
+    //   let width = window.innerWidth;
+    //   let count = 1;
+    //   if (width > '840px') {
+    //     count = 3;
+    //   } else if ((width > '420px' && width < '840px')) {
+    //     count = 2;
+    //   }
+    //
+    //   return 100 / count;
+    // },
+  },
+  methods: {
     cardsWidth() {
-      let width = window.innerWidth;
+      let width = window.innerWidth;//ширина возвращается числом, количеством пикселей
       let count = 1;
-      if (width > '840px') {
+      if (width > 840) {
         count = 3;
-      } else if ((width > '420px' && width < '840px')) {
+      } else if ((width > 420 && width < 840)) {
         count = 2;
       }
 
       return 100 / count;
-    },
-  },
-  methods: {
+    },//лучше перенести этот метод в методы, так как computed свойства кешируются
     startPricesMonitoring() {
       setInterval(this.getList, 1000);
     },
@@ -59,6 +70,7 @@ export default {
     },
   },
   created() {
+    this.getList();//лучше в первый раз получить список сразу, не ожидая обновления
     this.startPricesMonitoring();
   },
 };

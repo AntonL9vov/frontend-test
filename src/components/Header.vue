@@ -2,10 +2,11 @@
 export default {
   name: 'Header',
   props: {
-    cart: Array,
-    required: true,
-    default: {},
-
+    cart: {
+      type: Array,
+      required: true,
+      default: [],
+    },//планировалось ввести значение в виде объекта, так же дефолтное значение должно соответствовать типу
     currency: String,
   },
   data() {
@@ -19,7 +20,7 @@ export default {
       cart.forEach((item) => {
         val += item.price * item.amount;
       });
-      this.cartPrice = val;
+      this.cartPrice = val.toFixed(2);//чтоб не возникало лишних цифр
     },
   },
 }
