@@ -1,6 +1,6 @@
 <template>
   <div class="cart-list">
-    <div v-for="item in listForRender">
+    <div v-for="item in spisok_dlya_rendera">
       {{ item }}
     </div>
   </div>
@@ -12,7 +12,7 @@ export default {
     cart: Array,
   },
   computed: {
-      listForRender() {
+      spisok_dlya_rendera() {
           return this.cart.reverse();
       },
   },

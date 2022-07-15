@@ -1,6 +1,6 @@
 <template>
   <div class="product-list">
-    <div class="card" v-for="product in products" :style="{width: cardsWidth() + '%'}">
+    <div class="card" v-for="product in products" :style="{width: cardsWidth + '%'}">
       <p class="card-title">{{ product.title }}</p>
       <img class="card-image" :src="product.image" alt="">
       <p class="card-price">Цена: {{ product.price }} {{ currency }}</p>
@@ -26,20 +26,21 @@ export default {
     };
   },
   computed: {
-    // cardsWidth() {
-    //   let width = window.innerWidth;
-    //   let count = 1;
-    //   if (width > 840) {
-    //     count = 3;
-    //   } else if ((width > 420 && width < 840)) {
-    //     count = 2;
-    //   }
-    //   return 100 / count;
-    // },
+    cardsWidth() {
+      let width = window.innerWidth;
+      let count = 1;
+      if (width > '840px') {
+        count = 3;
+      } else if ((width > '420px' && width < '840px')) {
+        count = 2;
+      }
+
+      return 100 / count;
+    },
   },
   methods: {
     startPricesMonitoring() {
-      setInterval(this.getList, 2000);
+      setInterval(this.getList, 1000);
     },
     async getList() {
       let data = await this.$store.dispatch('getProductsList');
@@ -56,19 +57,8 @@ export default {
       };
       this.$parent.cart.push(data);
     },
-    cardsWidth() {
-      let width = window.innerWidth;
-      let count = 1;
-      if (width > 840) {
-        count = 3;
-      } else if ((width > 420 && width < 840)) {
-        count = 2;
-      }
-      return 100 / count;
-    }
   },
   created() {
-    this.getList();
     this.startPricesMonitoring();
   },
 };

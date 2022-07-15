@@ -2,11 +2,10 @@
 export default {
   name: 'Header',
   props: {
-    cart: {
-      required: true,
-      type: Array,
-      default: [],
-    },
+    cart: Array,
+    required: true,
+    default: {},
+
     currency: String,
   },
   data() {
@@ -20,7 +19,7 @@ export default {
       cart.forEach((item) => {
         val += item.price * item.amount;
       });
-      this.cartPrice = val.toFixed(2);
+      this.cartPrice = val;
     },
   },
 }
